@@ -42,7 +42,7 @@ You can also put all this data in a list or any other iterable.
 - Call ```plot_complexity()``` like below:
 
 ```python
-from time_complexity import plot_complexity
+from time_complexity.time_complexity import plot_complexity
 
 plot_complexity(append_to_list, generate_input())
 ```
