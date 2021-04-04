@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     # Needed to silence warnings (and to be a worthwhile package)
-    name="TimeComplexity",
+    name="time_complexity",
     url="https://github.com/Cy-r0/time_complexity",
     author="Ciro Cursio",
     author_email="none@gmail.com",
