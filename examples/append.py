@@ -1,28 +1,28 @@
 import random
 
-# This makes the import work even before package installation
-import os, sys, inspect
-current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-parent_dir = os.path.dirname(current_dir)
-sys.path.insert(0, os.path.join(parent_dir, "time_complexity"))
-
 from time_complexity import plot_complexity
 
 
-"""
-Append one number to a list. Complexity is O(1).
-"""
-def append_to_list(mylist, num):
+def append(mylist, num):
+    """
+    Append number to list. Complexity is O(1).
+    """
     return mylist.append(num)
 
 
-def generate_input():
-    for l in range(30):
-        mylist = [random.randint(0, 3) for _ in range(l)]
+def generate_input(start, stop, step):
+    """
+    Create input arguments for the function to be timed.
+    In this case, for the function list_append() there are two args: (l, num).
+    l changes in complexity (length), while num stays the same.
+    Depending on your needs, you can add other arguments.
+    """
+    for n in range(start, stop, step):
+        mylist = [random.randint(0, n) for _ in range(n)]
         num = 3
-        yield (mylist, num), l
+        yield (mylist, num), n
 
 
 if __name__ == "__main__":
 
-    plot_complexity(append_to_list, generate_input())
+    plot_complexity(append, generate_input(0, 100, 5))

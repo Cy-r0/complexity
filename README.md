@@ -14,30 +14,30 @@ Install package with pip:
 
 ## How to use
 
-1. Put your code inside a function, for example:
+1. Put the code you want to time inside a function, for example:
 
     ```python
-    def append_to_list(mylist, num):
+    def append(mylist, num):
         return mylist.append(num)
     ```
 
 
-2. Create an iterable or iterator that contains the arguments of the function for all input lengths you're interested in, e.g.:
+2. Create an iterable or iterator that yields the arguments of the function for all input lengths you're interested in, e.g.:
   
     ```python
     import random
 
-    def generate_input():
-        for l in range(30):
-            mylist = [random.randint(0, 3) for _ in range(l)]
+    def generate_input(start, stop, step):
+        for n in range(start, stop, step):
+            mylist = [random.randint(0, n) for _ in range(n)]
             num = 3
-            yield (mylist, num), l
+            yield (mylist, num), n
     ```
 
-    This generator returns a tuple of two things:
+    The above generator returns a tuple of two things:
 
     1. The arguments of your function (i.e. mylist and num)
-    2. The length of the argument you're changing (in this example, you're changing the length of mylist from 0 to 29 elements)
+    2. The length of the argument you're changing
 
     You can also put all this data in a list or any other iterable.
 
@@ -45,9 +45,9 @@ Install package with pip:
 3. Call ```plot_complexity()``` like below:
 
     ```python
-    from time_complexity.time_complexity import plot_complexity
+    from time_complexity import plot_complexity
 
-    plot_complexity(append_to_list, generate_input())
+    plot_complexity(append_to_list, generate_input(0, 100, 5))
     ```
 
     You can optionally specify a third argument, ```repeat``` (defaults to 1000), which defines how many times execution is repeated to obtain a reasonable approximation for the real execution time (remember, execution time depends on many factors like CPU capabilities, what else is the CPU busy with..., so the time measurement can have a high variance).
@@ -57,36 +57,27 @@ Install package with pip:
     ```
     Plot complexity. Repeat: 1000
     Iterating over input lengths...
-    Input len: 0 	Time: 0.16 us
-    Input len: 1 	Time: 0.141 us
-    Input len: 2 	Time: 0.159 us
-    Input len: 3 	Time: 0.146 us
-    Input len: 4 	Time: 0.146 us
-    Input len: 5 	Time: 0.159 us
-    Input len: 6 	Time: 0.159 us
-    Input len: 7 	Time: 0.16 us
-    Input len: 8 	Time: 0.14 us
-    Input len: 9 	Time: 0.141 us
-    Input len: 10 	Time: 0.141 us
-    Input len: 11 	Time: 0.141 us
-    Input len: 12 	Time: 0.142 us
-    Input len: 13 	Time: 0.144 us
-    Input len: 14 	Time: 0.141 us
-    Input len: 15 	Time: 0.142 us
-    Input len: 16 	Time: 0.147 us
-    Input len: 17 	Time: 0.159 us
-    Input len: 18 	Time: 0.159 us
-    Input len: 19 	Time: 0.139 us
-    Input len: 20 	Time: 0.158 us
-    Input len: 21 	Time: 0.143 us
-    Input len: 22 	Time: 0.14 us
-    Input len: 23 	Time: 0.16 us
-    Input len: 24 	Time: 0.141 us
-    Input len: 25 	Time: 0.16 us
-    Input len: 26 	Time: 0.142 us
-    Input len: 27 	Time: 0.142 us
-    Input len: 28 	Time: 0.142 us
-    Input len: 29 	Time: 0.141 us
+    Input len: 0 	Time: 0.154 us
+    Input len: 5 	Time: 0.145 us
+    Input len: 10 	Time: 0.15199 us
+    Input len: 15 	Time: 0.145 us
+    Input len: 20 	Time: 0.149 us
+    Input len: 25 	Time: 0.142 us
+    Input len: 30 	Time: 0.148 us
+    Input len: 35 	Time: 0.145 us
+    Input len: 40 	Time: 0.144 us
+    Input len: 45 	Time: 0.157 us
+    Input len: 50 	Time: 0.144 us
+    Input len: 55 	Time: 0.146 us
+    Input len: 60 	Time: 0.144 us
+    Input len: 65 	Time: 0.143 us
+    Input len: 70 	Time: 0.143 us
+    Input len: 75 	Time: 0.14999 us
+    Input len: 80 	Time: 0.156 us
+    Input len: 85 	Time: 0.151 us
+    Input len: 90 	Time: 0.149 us
+    Input len: 95 	Time: 0.14999 us
+
     ```
 
     And a plot will appear:
@@ -95,7 +86,7 @@ Install package with pip:
 
     There is no correlation between input length and time, which suggests complexity is O(1).
 
-    For another example, check out ```examples/good_pairs.py```, where an O(n^2) algorithm is timed. Plot is below:
+    For another example, check out ```examples/max.py```, where an O(n) algorithm is timed. Plot is below:
 
-    ![quad_time](media/O(n^2).png)
+    ![quad_time](media/O(n).png)
 
