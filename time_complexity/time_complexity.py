@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def measure_time(func, repeat=1000):
     """
-    Decorator that repeatedly executes a function
+    Repeatedly executes a function
     and records lowest time.
     """
 
@@ -50,7 +50,7 @@ def plot_complexity(func, inputs, repeat=1000):
 
         time *= 1e6 # Convert from s to us
         times.append(time)
-        print(f"Input len: {input_len} \tTime: {time:.5} us")
+        print(f"Input len: {input_len} \t\tTime: {time:.5} us")
     
     plt.plot(lengths, times, linestyle="-", marker="o")
     plt.xlabel("input length")
